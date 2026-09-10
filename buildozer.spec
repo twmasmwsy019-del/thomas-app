@@ -9,11 +9,8 @@ version = 0.1
 requirements = python3,kivy,pillow,qrcode
 orientation = portrait
 
-android.api = 31
+android.api = 33
 android.minapi = 21
-android.sdk = 31
-android.ndk = 25b
-android.build_tools_version = 31.0.0
 fullscreen = 0
 
 [buildozer]
