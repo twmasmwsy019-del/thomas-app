@@ -21,7 +21,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libsqlite3-dev libssl-dev git unzip lld
         pip install --upgrade pip
-        pip install cython==0.29.36 kivy pillow qrcode
+        pip install --upgrade setuptools wheel cython==0.29.36 kivy pillow qrcode
 
     - name: Install python-for-android
       run: |
@@ -44,4 +44,3 @@ jobs:
       with:
         name: thomas-supermarket-apk
         path: "*.apk"
-        
