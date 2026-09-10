@@ -1,9 +1,8 @@
-name: Build Android APK
+name: Build APK with p4a
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [ main, master ]
 
 jobs:
   build:
@@ -17,23 +16,32 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install System Dependencies
+    - name: Install System Dependencies & Java
       run: |
         sudo apt-get update
-        sudo apt-get install -y ccache git libffi-dev libssl-dev python3-dev openjdk-17-jdk unzip zip
+        sudo apt-get install -y openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libsqlite3-dev libssl-dev git unzip lld
+        pip install --upgrade pip
+        pip install cython==0.29.36 kivy pillow qrcode
 
-    - name: Install Buildozer & Cython
+    - name: Install python-for-android
       run: |
-        pip install --upgrade pip setuptools
-        pip install buildozer cython==0.29.33
+        pip install python-for-android
 
-    - name: Build APK
+    - name: Build APK Directly
       run: |
-        buildozer -v android debug
+        p4a apk --private . \
+          --package=org.thomas \
+          --name="Thomas Supermarket" \
+          --version=0.1 \
+          --bootstrap=sdl2 \
+          --requirements=python3,kivy,pillow,qrcode \
+          --android-api 33 \
+          --min-sdk 21 \
+          --arch arm64-v8a
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ThomasSupermarket-APK
-        path: bin/*.apk
+        name: thomas-supermarket-apk
+        path: "*.apk"
         
