@@ -13,6 +13,7 @@ fullscreen = 0
 android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE
 
 [buildozer]
+android.accept_sdk_license = True
 log_level = 2
 warn_on_root = 1
 
