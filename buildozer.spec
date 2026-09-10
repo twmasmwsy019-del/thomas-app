@@ -1,5 +1,4 @@
 [app]
-[app]
 
 title = Thomas Supermarket
 package.name = thomasapp
